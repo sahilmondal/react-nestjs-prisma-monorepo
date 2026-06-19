@@ -1,10 +1,9 @@
-﻿"use client"
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMemo, useState, Suspense } from "react"
 import { useForm } from "react-hook-form"
-import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { Link, useNavigate, useSearch } from "@tanstack/react-router"
 import { z } from "zod"
 
 import { AuthApiError, useAuthStore } from "@workspace/auth-client"
@@ -26,10 +25,10 @@ import {
 } from "./authForms.schema"
 
 function ResetPasswordFields() {
-  const searchParams = useSearchParams()
-  const router = useRouter()
+  const searchParams = useSearch({ strict: false }) as Record<string, string>
+  const navigate = useNavigate()
   const { resetPassword } = useAuthStore()
-  const token = useMemo(() => searchParams.get("token") ?? "", [searchParams])
+  const token = useMemo(() => searchParams.token ?? "", [searchParams])
   const [rootError, setRootError] = useState<string | null>(null)
 
   const form = useForm<ResetPasswordFormValues>({
@@ -49,7 +48,7 @@ function ResetPasswordFields() {
     }
     try {
       await resetPassword(decodeURIComponent(token), values.password)
-      router.replace("/login")
+      void navigate({ to: "/login", replace: true })
     } catch (e) {
       if (e instanceof AuthApiError) {
         setRootError(e.message)
@@ -66,7 +65,7 @@ function ResetPasswordFields() {
       footer={
         <Link
           className="text-sm text-primary underline-offset-4 hover:underline"
-          href="/login"
+          to="/login"
         >
           Back to log in
         </Link>

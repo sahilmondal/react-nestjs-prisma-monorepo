@@ -1,10 +1,9 @@
-﻿"use client"
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { Link, useNavigate } from "@tanstack/react-router"
 import { z } from "zod"
 
 import { AuthApiError, AuthStatus, useAuthStore } from "@workspace/auth-client"
@@ -25,7 +24,7 @@ import { OAuthButtons } from "./oauthButtons"
 import { loginSchema, type LoginFormValues } from "./authForms.schema"
 
 export function LoginForm() {
-  const router = useRouter()
+  const navigate = useNavigate()
   const { login, status } = useAuthStore()
   const [rootError, setRootError] = useState<string | null>(null)
 
@@ -36,15 +35,15 @@ export function LoginForm() {
 
   useEffect(() => {
     if (status === AuthStatus.AUTHENTICATED) {
-      router.replace("/dashboard")
+      void navigate({ to: "/dashboard", replace: true })
     }
-  }, [router, status])
+  }, [navigate, status])
 
   async function onSubmit(values: LoginFormValues) {
     setRootError(null)
     try {
       await login(values.email, values.password)
-      router.replace("/dashboard")
+      void navigate({ to: "/dashboard", replace: true })
     } catch (e) {
       if (e instanceof AuthApiError) {
         setRootError(e.message)
@@ -63,7 +62,7 @@ export function LoginForm() {
           No account?{" "}
           <Link
             className="text-primary underline-offset-4 hover:underline"
-            href="/signup"
+            to="/signup"
           >
             Sign up
           </Link>
@@ -118,7 +117,7 @@ export function LoginForm() {
       <div className="flex justify-center text-sm">
         <Link
           className="text-muted-foreground hover:text-foreground"
-          href="/forgot-password"
+          to="/forgot-password"
         >
           Forgot password?
         </Link>

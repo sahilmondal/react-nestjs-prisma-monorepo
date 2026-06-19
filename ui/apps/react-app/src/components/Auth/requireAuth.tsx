@@ -1,12 +1,12 @@
-﻿"use client"
+"use client"
 
 import type { ReactNode } from "react"
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "@tanstack/react-router"
 import { AuthStatus, useAuthStore } from "@workspace/auth-client"
 
 export function RequireAuth({ children }: { children: ReactNode }) {
-  const router = useRouter()
+  const navigate = useNavigate()
   const { status, hydrate } = useAuthStore()
 
   useEffect(() => {
@@ -15,9 +15,9 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (status === AuthStatus.UNAUTHENTICATED) {
-      router.replace("/login")
+      void navigate({ to: "/login", replace: true })
     }
-  }, [router, status])
+  }, [navigate, status])
 
   if (status === AuthStatus.IDLE || status === AuthStatus.LOADING) {
     return (

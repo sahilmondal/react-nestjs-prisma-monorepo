@@ -1,10 +1,9 @@
-﻿"use client"
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { Link, useNavigate } from "@tanstack/react-router"
 import { z } from "zod"
 
 import { AuthApiError, AuthStatus, useAuthStore } from "@workspace/auth-client"
@@ -24,7 +23,7 @@ import { OAuthButtons } from "./oauthButtons"
 import { signupSchema, type SignupFormValues } from "./authForms.schema"
 
 export function SignupForm() {
-  const router = useRouter()
+  const navigate = useNavigate()
   const { register: registerUser, status } = useAuthStore()
   const [rootError, setRootError] = useState<string | null>(null)
 
@@ -35,9 +34,9 @@ export function SignupForm() {
 
   useEffect(() => {
     if (status === AuthStatus.AUTHENTICATED) {
-      router.replace("/dashboard")
+      void navigate({ to: "/dashboard", replace: true })
     }
-  }, [router, status])
+  }, [navigate, status])
 
   async function onSubmit(values: SignupFormValues) {
     setRootError(null)
@@ -47,7 +46,7 @@ export function SignupForm() {
         password: values.password,
         name: values.name?.trim(),
       })
-      router.replace("/dashboard")
+      void navigate({ to: "/dashboard", replace: true })
     } catch (e) {
       if (e instanceof AuthApiError) {
         setRootError(e.message)
@@ -66,7 +65,7 @@ export function SignupForm() {
           Already have an account?{" "}
           <Link
             className="text-primary underline-offset-4 hover:underline"
-            href="/login"
+            to="/login"
           >
             Log in
           </Link>

@@ -1,15 +1,15 @@
-# Next.js + NestJS Auth Turborepo
+# React + NestJS Auth Turborepo
 
-A full-stack monorepo with Next.js frontend, NestJS backend, Prisma ORM, and comprehensive authentication.
+A full-stack monorepo with React frontend (Vite + TanStack Router), NestJS backend, Prisma ORM, and comprehensive authentication.
 
 ## Tech Stack
 
 ### Frontend
 
-- **Framework**: Next.js 16.2.6
-- **UI Library**: shadcn/ui + Tailwind CSS
-- **Language**: TypeScript 5.9.3
-- **State Management**: React Hook Form + Zod
+- **Framework**: React 19 + Vite + TanStack Router
+- **UI Library**: shadcn/ui + Tailwind CSS v4
+- **Language**: TypeScript 6.0.2
+- **State Management**: Zustand + React Hook Form + Zod
 - **Package Manager**: bun 1.2.6
 
 ### Backend
@@ -30,7 +30,7 @@ A full-stack monorepo with Next.js frontend, NestJS backend, Prisma ORM, and com
 ## Project Structure
 
 ```
-next-nest-auth-turborepo/
+react-nestjs-prisma-monorepo/
 ├── apps/
 │   ├── nestjs-prisma-api/          # NestJS Backend API
 │   │   ├── src/
@@ -57,39 +57,40 @@ next-nest-auth-turborepo/
 │   │   ├── nest-cli.json
 │   │   └── package.json
 │   │
-│   └── nextjs-app/                 # Next.js Frontend (Port 3001)
-│       ├── app/
-│       │   ├── layout.tsx
-│       │   ├── page.tsx            # Home page
-│       │   ├── login/              # Login page
-│       │   ├── signup/             # Sign up page
-│       │   ├── forgot-password/    # Forgot password page
-│       │   ├── reset-password/     # Reset password page
-│       │   ├── dashboard/          # Dashboard page (protected)
-│       │   └── globals.css
-│       ├── components/
-│       │   └── dashboard/
-│       ├── public/
-│       ├── ui-core/                # Custom theme provider
+│   └── react-app/                  # React Frontend (Port 3000)
+│       ├── src/
+│       │   ├── components/         # Local UI components (Header, ThemeToggle)
+│       │   │   └── Auth/           # Auth feature (login, signup, auth forms, Auth Guard)
+│       │   ├── routes/             # TanStack Router file-based routes
+│       │   │   ├── __root.tsx      # Root layout
+│       │   │   ├── index.tsx       # Home page
+│       │   │   ├── login.tsx       # Login page
+│       │   │   ├── signup.tsx      # Sign up page
+│       │   │   ├── forgot-password.tsx
+│       │   │   ├── reset-password.tsx
+│       │   │   └── dashboard.tsx   # Dashboard page (protected)
+│       │   ├── lib/
+│       │   ├── router.tsx
+│       │   ├── routeTree.gen.ts    # Generated routes
+│       │   └── styles.css
+│       ├── vite.config.ts
+│       ├── tsr.config.json
 │       └── package.json
 │
 ├── packages/
 │   ├── auth-client/                # Auth API client library
 │   │   ├── src/
 │   │   │   ├── api.ts              # API client
-│   │   │   ├── store.ts            # Auth state management
+│   │   │   ├── store.ts            # Auth state management (Zustand)
 │   │   │   ├── types.ts            # Type definitions
 │   │   │   └── env.ts              # Environment config
 │   │   └── package.json
 │   │
-│   ├── ui/                         # Shared UI components (shadcn/ui)
-│   │   ├── src/
-│   │   │   ├── components/
-│   │   │   │   └── Auth/           # Authentication UI components
-│   │   │   ├── hooks/
-│   │   │   ├── lib/
-│   │   │   ├── styles/
-│   │   │   └── ui-core/            # shadcn/ui components
+│   ├── ui/                         # Shared UI components
+│   │   ├── shared/
+│   │   │   ├── ui-components/      # Reusable features (Shared layouts/shells)
+│   │   │   ├── ui-core/            # shadcn/ui components (Buttons, Inputs)
+│   │   │   └── ui-utils/           # Tailwind utils (cn)
 │   │   └── package.json
 │   │
 │   ├── eslint-config/              # Shared ESLint configs
@@ -122,7 +123,7 @@ next-nest-auth-turborepo/
 
 ```bash
 git clone <repository-url>
-cd next-nest-auth-turborepo
+cd react-nestjs-prisma-monorepo
 ```
 
 ### 2. Setup Environment Variables
@@ -132,8 +133,6 @@ cd next-nest-auth-turborepo
 Create `.env` file in `apps/nestjs-prisma-api/`:
 
 ```env
-# nestjs-prisma-api — copy to `.env` in this folder
-
 NODE_ENV=development
 PORT=3009
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nestjs_prisma
@@ -144,10 +143,10 @@ ACCESS_TOKEN_TTL=15m
 REFRESH_TOKEN_TTL_DAYS=7
 
 # CORS / URLs
-FRONTEND_ORIGINS=http://localhost:3000,http://localhost:3001
+FRONTEND_ORIGINS=http://localhost:3000
 API_PUBLIC_URL=http://localhost:3009
-OAUTH_SUCCESS_REDIRECT=http://localhost:3001/dashboard // Set to your frontend dashboard or home page
-PASSWORD_RESET_URL_BASE=http://localhost:3001/reset-password // Set to your frontend password reset page
+OAUTH_SUCCESS_REDIRECT=http://localhost:3000/dashboard // Set to your frontend dashboard
+PASSWORD_RESET_URL_BASE=http://localhost:3000/reset-password // Set to your frontend password reset page
 
 # OAuth (disabled by default — set client IDs when enabling)
 AUTH_GOOGLE_ENABLED=false
@@ -161,18 +160,16 @@ GITHUB_CLIENT_SECRET=
 MAIL_MODE=console
 RESEND_API_KEY=
 RESEND_FROM=noreply@yourdomain.com
-
 ```
 
-#### Next.js App Environment (apps/nextjs-app)
+#### React App Environment (ui/apps/react-app)
 
-Create `.env.local` file in `apps/nextjs-app/`:
+Create `.env` file in `ui/apps/react-app/`:
 
 ```env
-# API
-NEXT_PUBLIC_API_URL=http://localhost:3009 // URL of the NestJS API
-NEXT_PUBLIC_AUTH_GOOGLE_ENABLED=false // Set to true if enabling Google OAuth in the backend
-NEXT_PUBLIC_AUTH_GITHUB_ENABLED=false // Set to true if enabling GitHub OAuth in the backend
+VITE_API_URL=http://localhost:3009
+VITE_AUTH_GOOGLE_ENABLED=false
+VITE_AUTH_GITHUB_ENABLED=false
 ```
 
 ### 3. Install Dependencies
@@ -218,7 +215,7 @@ bun dev
 
 This will start both applications simultaneously:
 
-- **Next.js Frontend**: http://localhost:3001
+- **React Frontend**: http://localhost:3000
 - **NestJS API**: http://localhost:3009
 
 ### Alternative: Run Apps Individually
@@ -230,10 +227,10 @@ cd apps/nestjs-prisma-api
 bun dev
 ```
 
-#### Start only Next.js App:
+#### Start only React App:
 
 ```bash
-cd apps/nextjs-app
+cd ui/apps/react-app
 bun dev
 ```
 
@@ -285,43 +282,14 @@ bun run format
 bun run typecheck
 ```
 
-### NestJS API Scripts
-
-From `apps/nestjs-prisma-api/`:
-
-```bash
-bun run dev          # Start dev server with watch
-bun run build        # Build production bundle
-bun run start        # Start production server
-bun run test         # Run unit tests
-bun run test:e2e     # Run E2E tests
-bun run lint         # Lint code
-bun run format       # Format code
-```
-
-### Next.js App Scripts
-
-From `apps/nextjs-app/`:
-
-```bash
-bun run dev          # Start dev server (port 3001)
-bun run build        # Build for production
-bun run start        # Start production server
-bun run lint         # Lint code
-bun run format       # Format code
-bun run typecheck    # Type check
-```
-
 ## Adding Components
 
 To add a new shadcn/ui component to the shared UI package:
 
 ```bash
-cd packages/ui
+cd ui/shared/ui-core
 bunx --bun shadcn@latest add button
 ```
-
-This will place the UI component in the `packages/ui/src/components` directory.
 
 ## Using Shared Components
 
@@ -336,73 +304,5 @@ import { Button, Card, Input } from "@workspace/ui-core";
 Import the auth client from `@workspace/auth-client`:
 
 ```tsx
-import { useAuth, apiClient } from "@workspace/auth-client";
+import { useAuthStore, loginRequest } from "@workspace/auth-client";
 ```
-
-## Project Features
-
-### Authentication Module
-
-- JWT-based authentication
-- Passport.js integration (JWT, Google, GitHub strategies)
-- Secure password hashing with Argon2
-- Email verification support
-- Password reset functionality
-- OAuth provider integration
-
-### User Management
-
-- User registration and login
-- Profile management
-- Account security features
-- User preferences
-
-### Email Service
-
-- Email notifications via Resend
-- Welcome emails
-- Password reset emails
-- Verification emails
-
-### Frontend
-
-- Responsive design with Tailwind CSS
-- shadcn/ui components
-- Form validation with React Hook Form + Zod
-- Protected routes for authenticated users
-- Authentication UI pages (login, signup, forgot password, reset password)
-
-## Troubleshooting
-
-### Prisma Generation Issues
-
-If you encounter Prisma generation issues, try:
-
-```bash
-cd apps/nestjs-prisma-api
-rm -rf node_modules/.prisma
-bun run db:generate
-```
-
-### Database Connection Issues
-
-- Ensure PostgreSQL is running
-- Verify `DATABASE_URL` in `.env`
-- Check database credentials and permissions
-
-### Port Already in Use
-
-- **Next.js**: Configure different port in `apps/nextjs-app/package.json`
-- **NestJS**: Change `PORT` environment variable in `.env`
-
-## Contributing
-
-1. Create a feature branch
-2. Make your changes
-3. Run `bun lint` and `bun format`
-4. Run `bun typecheck` to verify types
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

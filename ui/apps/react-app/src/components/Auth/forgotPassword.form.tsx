@@ -1,9 +1,9 @@
-﻿"use client"
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import Link from "next/link"
+import { Link } from "@tanstack/react-router"
 import { z } from "zod"
 
 import { AuthApiError, useAuthStore } from "@workspace/auth-client"
@@ -57,7 +57,7 @@ export function ForgotPasswordForm() {
       footer={
         <Link
           className="text-sm text-primary underline-offset-4 hover:underline"
-          href="/login"
+          to="/login"
         >
           Back to log in
         </Link>
