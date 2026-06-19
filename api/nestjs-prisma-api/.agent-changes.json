@@ -1,0 +1,16 @@
+{
+  "app": "nestjs-prisma-api",
+  "lastUpdatedDate": "2026-05-18",
+  "description": "NestJS backend with Prisma ORM, authentication, and email services",
+  "changes": [
+    {
+      "date": "2026-05-18",
+      "agent": "system",
+      "type": "chore",
+      "description": "Initial SKILLS documentation created for AI agents",
+      "files": ["SKILLS.md"],
+      "skillsUpdated": true,
+      "notes": "Comprehensive documentation of NestJS architecture, modules, auth strategies, API endpoints, database schema, environment setup, and common workflows"
+    }
+  ]
+}

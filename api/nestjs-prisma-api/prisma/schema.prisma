@@ -1,0 +1,13 @@
+// Base Prisma schema — generator + datasource config only.
+// All models live in prisma/models/*.prisma (multi-file schema).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  runtime  = "nodejs"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}

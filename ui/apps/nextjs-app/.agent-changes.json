@@ -1,0 +1,16 @@
+{
+  "app": "nextjs-app",
+  "lastUpdatedDate": "2026-05-18",
+  "description": "Next.js 16 frontend with React 19, form handling, and authentication UI",
+  "changes": [
+    {
+      "date": "2026-05-18",
+      "agent": "system",
+      "type": "chore",
+      "description": "Initial SKILLS documentation created for AI agents",
+      "files": ["SKILLS.md"],
+      "skillsUpdated": true,
+      "notes": "Comprehensive documentation of Next.js setup, page routing, component architecture, form patterns, auth flows, Tailwind styling, and common development workflows"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+// User model — core user record
+
+model User {
+  id              String    @id @default(uuid()) @db.Uuid
+  email           String    @unique @db.VarChar(320)
+  passwordHash    String?   @map("password_hash") @db.VarChar(255)
+  emailVerifiedAt DateTime? @map("email_verified_at") @db.Timestamptz
+  name            String?   @db.VarChar(255)
+
+  refreshTokens       RefreshToken[]
+  authProviders       AuthProvider[]
+  passwordResetTokens PasswordResetToken[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("users")
+}

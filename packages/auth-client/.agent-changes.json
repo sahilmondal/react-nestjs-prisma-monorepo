@@ -1,0 +1,16 @@
+{
+  "app": "auth-client",
+  "lastUpdatedDate": "2026-05-18",
+  "description": "Reusable API client library with Zustand store for authentication",
+  "changes": [
+    {
+      "date": "2026-05-18",
+      "agent": "system",
+      "type": "chore",
+      "description": "Initial SKILLS documentation created for AI agents",
+      "files": ["SKILLS.md"],
+      "skillsUpdated": true,
+      "notes": "Comprehensive documentation of API client contract, request/response types, Zustand store interface, error handling, token management, and integration patterns"
+    }
+  ]
+}
