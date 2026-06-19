@@ -31,75 +31,213 @@ A full-stack monorepo with React frontend (Vite + TanStack Router), NestJS backe
 
 ```
 react-nestjs-prisma-monorepo/
-├── apps/
-│   ├── nestjs-prisma-api/          # NestJS Backend API
-│   │   ├── src/
-│   │   │   ├── modules/
-│   │   │   │   ├── auth/           # Authentication module (JWT, Passport)
-│   │   │   │   ├── users/          # User management
-│   │   │   │   └── mailer/         # Email service
-│   │   │   ├── config/             # Environment validation
-│   │   │   ├── common/             # Decorators & common utilities
-│   │   │   ├── generated/          # Prisma generated types
-│   │   │   ├── lib/                # Prisma client setup
-│   │   │   ├── app.module.ts       # Main app module
-│   │   │   ├── main.ts             # App entry point
-│   │   │   └── prisma.service.ts   # Prisma service
-│   │   ├── prisma/
-│   │   │   ├── schema.prisma       # Database schema
-│   │   │   ├── models/
-│   │   │   │   ├── user.prisma
-│   │   │   │   ├── auth.prisma
-│   │   │   │   └── auth-provider.prisma
-│   │   │   ├── migrations/         # Database migrations
-│   │   │   └── seed.ts             # Database seeding
-│   │   ├── test/                   # E2E tests
-│   │   ├── nest-cli.json
-│   │   └── package.json
-│   │
-│   └── react-app/                  # React Frontend (Port 3000)
-│       ├── src/
-│       │   ├── components/         # Local UI components (Header, ThemeToggle)
-│       │   │   └── Auth/           # Auth feature (login, signup, auth forms, Auth Guard)
-│       │   ├── routes/             # TanStack Router file-based routes
-│       │   │   ├── __root.tsx      # Root layout
-│       │   │   ├── index.tsx       # Home page
-│       │   │   ├── login.tsx       # Login page
-│       │   │   ├── signup.tsx      # Sign up page
-│       │   │   ├── forgot-password.tsx
-│       │   │   ├── reset-password.tsx
-│       │   │   └── dashboard.tsx   # Dashboard page (protected)
-│       │   ├── lib/
-│       │   ├── router.tsx
-│       │   ├── routeTree.gen.ts    # Generated routes
-│       │   └── styles.css
-│       ├── vite.config.ts
-│       ├── tsr.config.json
-│       └── package.json
-│
-├── packages/
-│   ├── auth-client/                # Auth API client library
-│   │   ├── src/
-│   │   │   ├── api.ts              # API client
-│   │   │   ├── store.ts            # Auth state management (Zustand)
-│   │   │   ├── types.ts            # Type definitions
-│   │   │   └── env.ts              # Environment config
-│   │   └── package.json
-│   │
-│   ├── ui/                         # Shared UI components
-│   │   ├── shared/
-│   │   │   ├── ui-components/      # Reusable features (Shared layouts/shells)
-│   │   │   ├── ui-core/            # shadcn/ui components (Buttons, Inputs)
-│   │   │   └── ui-utils/           # Tailwind utils (cn)
-│   │   └── package.json
-│   │
-│   ├── eslint-config/              # Shared ESLint configs
-│   └── typescript-config/          # Shared TypeScript configs
-│
-├── docs/
-├── turbo.json                      # Turbo configuration
-├── tsconfig.json                   # Root TypeScript config
-└── package.json
+├── .commandcode
+│   └── taste
+│       └── taste.md
+├── api
+│   └── nestjs-prisma-api
+│       ├── .agents
+│       │   └── skills
+│       │       ├── prisma-cli
+│       │       │   ├── references
+│       │       │   └── SKILL.md
+│       │       ├── prisma-client-api
+│       │       │   ├── references
+│       │       │   └── SKILL.md
+│       │       ├── prisma-database-setup
+│       │       │   ├── references
+│       │       │   └── SKILL.md
+│       │       └── prisma-upgrade-v7
+│       │           ├── references
+│       │           └── SKILL.md
+│       ├── prisma
+│       │   ├── migrations
+│       │   │   ├── 20260515161719_init_auth_schema
+│       │   │   │   └── migration.sql
+│       │   │   └── migration_lock.toml
+│       │   ├── models
+│       │   │   ├── auth-provider.prisma
+│       │   │   ├── auth.prisma
+│       │   │   └── user.prisma
+│       │   ├── schema.prisma
+│       │   └── seed.ts
+│       ├── src
+│       │   ├── common
+│       │   │   └── decorators
+│       │   │       └── current-user.decorator.ts
+│       │   ├── config
+│       │   │   └── env.validation.ts
+│       │   ├── lib
+│       │   │   └── prisma.ts
+│       │   ├── modules
+│       │   │   ├── auth
+│       │   │   │   ├── dto
+│       │   │   │   ├── guards
+│       │   │   │   ├── strategies
+│       │   │   │   ├── auth.constants.ts
+│       │   │   │   ├── auth.controller.ts
+│       │   │   │   ├── auth.module.ts
+│       │   │   │   ├── auth.service.ts
+│       │   │   │   └── auth.tokens.ts
+│       │   │   ├── mailer
+│       │   │   │   ├── console-mail.sender.ts
+│       │   │   │   ├── mail-sender.type.ts
+│       │   │   │   ├── mailer.module.ts
+│       │   │   │   └── resend-mail.sender.ts
+│       │   │   └── users
+│       │   │       ├── users.controller.ts
+│       │   │       ├── users.module.ts
+│       │   │       └── users.service.ts
+│       │   ├── app.module.ts
+│       │   ├── health.controller.ts
+│       │   ├── main.ts
+│       │   └── prisma.service.ts
+│       ├── test
+│       │   ├── app.e2e-spec.ts
+│       │   └── jest-e2e.json
+│       ├── .agent-changes.json
+│       ├── .env.example
+│       ├── .gitignore
+│       ├── .prettierrc
+│       ├── eslint.config.mjs
+│       ├── nest-cli.json
+│       ├── package.json
+│       ├── prisma.config.ts
+│       ├── README.md
+│       ├── skills-lock.json
+│       ├── SKILLS.md
+│       ├── tsconfig.build.json
+│       └── tsconfig.json
+├── packages
+│   ├── auth-client
+│   │   ├── src
+│   │   │   ├── api.ts
+│   │   │   ├── env.ts
+│   │   │   ├── index.ts
+│   │   │   ├── store.ts
+│   │   │   └── types.ts
+│   │   ├── .agent-changes.json
+│   │   ├── eslint.config.js
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── SKILLS.md
+│   │   └── tsconfig.json
+│   ├── eslint-config
+│   │   ├── base.js
+│   │   ├── next.js
+│   │   ├── package.json
+│   │   ├── react-internal.js
+│   │   ├── README.md
+│   │   └── SKILLS.md
+│   └── typescript-config
+│       ├── base.json
+│       ├── nest-api.json
+│       ├── nextjs.json
+│       ├── package.json
+│       ├── react-library.json
+│       ├── README.md
+│       └── SKILLS.md
+├── ui
+│   ├── apps
+│   │   └── react-app
+│   │       ├── .tanstack
+│   │       │   └── tmp
+│   │       ├── public
+│   │       │   ├── favicon.ico
+│   │       │   ├── logo192.png
+│   │       │   ├── logo512.png
+│   │       │   ├── manifest.json
+│   │       │   └── robots.txt
+│   │       ├── src
+│   │       │   ├── components
+│   │       │   │   ├── Auth
+│   │       │   │   └── ThemeToggle.tsx
+│   │       │   ├── lib
+│   │       │   │   └── utils.ts
+│   │       │   ├── routes
+│   │       │   │   ├── __root.tsx
+│   │       │   │   ├── about.tsx
+│   │       │   │   ├── dashboard.tsx
+│   │       │   │   ├── forgot-password.tsx
+│   │       │   │   ├── index.tsx
+│   │       │   │   ├── login.tsx
+│   │       │   │   ├── reset-password.tsx
+│   │       │   │   └── signup.tsx
+│   │       │   ├── router.tsx
+│   │       │   ├── routeTree.gen.ts
+│   │       │   └── styles.css
+│   │       ├── .cta.json
+│   │       ├── .cursorrules
+│   │       ├── .env
+│   │       ├── .env.example
+│   │       ├── .gitignore
+│   │       ├── components.json
+│   │       ├── package.json
+│   │       ├── README.md
+│   │       ├── tsconfig.json
+│   │       ├── tsr.config.json
+│   │       └── vite.config.ts
+│   └── shared
+│       ├── ui-components
+│       │   ├── src
+│       │   │   ├── components
+│       │   │   │   └── index.ts
+│       │   │   ├── hooks
+│       │   │   │   └── index.ts
+│       │   │   └── index.ts
+│       │   ├── eslint.config.js
+│       │   ├── package.json
+│       │   ├── postcss.config.mjs
+│       │   ├── README.md
+│       │   ├── SKILLS.md
+│       │   └── tsconfig.json
+│       ├── ui-core
+│       │   ├── src
+│       │   │   ├── hooks
+│       │   │   │   ├── index.ts
+│       │   │   │   └── use-mobile.ts
+│       │   │   ├── lib
+│       │   │   │   ├── index.ts
+│       │   │   │   └── utils.ts
+│       │   │   ├── styles
+│       │   │   │   └── globals.css
+│       │   │   ├── ui-core
+│       │   │   │   ├── (... shadCn components)
+│       │   │   └── index.ts
+│       │   ├── .agent-changes.json
+│       │   ├── components.json
+│       │   ├── eslint.config.js
+│       │   ├── package.json
+│       │   ├── postcss.config.mjs
+│       │   ├── SKILLS.md
+│       │   ├── tsconfig.json
+│       │   └── tsconfig.lint.json
+│       └── ui-utils
+│           ├── src
+│           │   ├── constants
+│           │   │   └── index.ts
+│           │   ├── helpers
+│           │   │   └── index.ts
+│           │   ├── validators
+│           │   │   └── index.ts
+│           │   └── index.ts
+│           ├── eslint.config.js
+│           ├── package.json
+│           ├── README.md
+│           ├── SKILLS.md
+│           └── tsconfig.json
+├── .eslintrc.js
+├── .gitignore
+├── .npmrc
+├── .prettierignore
+├── .prettierrc
+├── AGENTS.md
+├── bun.lock
+├── LICENSE
+├── package.json
+├── README.md
+├── tsconfig.json
+└── turbo.json
 ```
 
 ## Authentication Features
