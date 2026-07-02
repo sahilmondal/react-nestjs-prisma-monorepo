@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { Button } from "@workspace/ui-core"
 import { getPublicAuthEnv, oauthStartUrl } from "@workspace/auth-client"

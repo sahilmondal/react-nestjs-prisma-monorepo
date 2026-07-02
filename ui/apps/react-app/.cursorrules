@@ -1,7 +1,15 @@
-# shadcn instructions
 
-Use the latest version of Shadcn to install new components, like this command to add a button component:
+When adding a new shadcn-ui component, you may have to add it to the "ui" folder in "packages/ui-core". This folder is not local to the app, it is a workspace dependency.
 
-```bash
-pnpm dlx shadcn@latest add button
+Most shadcn components leverage the `cn()` function found in `#/lib/utils`. This function is a combination of `clsx` and `tailwind-merge`, and is used to merge Tailwind CSS classes together. By default this function is not present in the app, but you can copy it from a different component or file, or create it yourself.
+
+For creating the `cn()` function, you can use the following code:
+
+```ts
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 ```

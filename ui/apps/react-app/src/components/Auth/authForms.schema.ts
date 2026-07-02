@@ -3,7 +3,6 @@ import { z } from "zod"
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/
 
-// Reusable validation schemas
 const emailSchema = z
   .string()
   .nonempty({ message: "Email is required." })
@@ -25,7 +24,6 @@ const nameSchema = z
   .min(2, { message: "Name must be at least 2 characters long." })
   .max(100, { message: "Name must be 100 characters or fewer." })
 
-// Login schema
 export const loginSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
@@ -33,7 +31,6 @@ export const loginSchema = z.object({
 
 export type LoginFormValues = z.infer<typeof loginSchema>
 
-// Signup schema
 export const signupSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
@@ -42,7 +39,6 @@ export const signupSchema = z.object({
 
 export type SignupFormValues = z.infer<typeof signupSchema>
 
-// Reset password schema
 export const resetPasswordSchema = z.object({
   password: passwordSchema,
   confirm: passwordSchema,

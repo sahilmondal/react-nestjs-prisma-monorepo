@@ -38,13 +38,15 @@ If you prefer not to use Tailwind CSS:
 3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
 4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
 
+## Linting & Formatting
 
-## Shadcn
 
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
+This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
 
 ```bash
-pnpm dlx shadcn@latest add button
+bun --bun run lint
+bun --bun run format
+bun --bun run check
 ```
 
 

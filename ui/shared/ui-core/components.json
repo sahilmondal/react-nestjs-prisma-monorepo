@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "radix-vega",
-  "rsc": true,
+  "style": "base-nova",
+  "rsc": false,
   "tsx": true,
   "tailwind": {
     "config": "",
@@ -9,13 +9,13 @@
     "baseColor": "neutral",
     "cssVariables": true
   },
-  "iconLibrary": "hugeicons",
+  "iconLibrary": "lucide",
   "aliases": {
-    "components": "@workspace/ui-core/core",
+    "components": "@workspace/ui-core/components",
     "utils": "@workspace/ui-core/lib/utils",
     "hooks": "@workspace/ui-core/hooks",
     "lib": "@workspace/ui-core/lib",
-    "ui": "@workspace/ui-core/core"
+    "ui": "@workspace/ui-core/components"
   },
   "rtl": false,
   "menuColor": "default-translucent",

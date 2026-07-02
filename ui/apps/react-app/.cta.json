@@ -3,16 +3,16 @@
   "mode": "file-router",
   "typescript": true,
   "packageManager": "bun",
-  "includeExamples": true,
+  "includeExamples": false,
   "tailwind": true,
   "addOnOptions": {},
   "envVarValues": {},
   "git": false,
   "install": true,
-  "routerOnly": false,
+  "routerOnly": true,
   "version": 1,
   "framework": "react",
   "chosenAddOns": [
-    "shadcn"
+    "eslint"
   ]
 }
