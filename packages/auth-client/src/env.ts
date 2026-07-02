@@ -1,12 +1,5 @@
 import type { PublicAuthEnv } from "./types.ts"
 
-function readNextPublicApiUrl(): string | undefined {
-  if (typeof process === "undefined" || !process.env) {
-    return undefined
-  }
-  return process.env.NEXT_PUBLIC_API_URL
-}
-
 function readViteApiUrl(): string | undefined {
   try {
     const env = import.meta as ImportMeta & {
@@ -25,19 +18,6 @@ function readBool(value: string | undefined, defaultValue = false): boolean {
   return value === "1" || value.toLowerCase() === "true" || value === "yes"
 }
 
-function readNextGoogle(): boolean {
-  if (typeof process === "undefined" || !process.env) {
-    return false
-  }
-  return readBool(process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED)
-}
-
-function readNextGithub(): boolean {
-  if (typeof process === "undefined" || !process.env) {
-    return false
-  }
-  return readBool(process.env.NEXT_PUBLIC_AUTH_GITHUB_ENABLED)
-}
 
 function readViteGoogle(): boolean {
   try {
@@ -64,10 +44,10 @@ function readViteGithub(): boolean {
 /** Resolve public auth-related env for client bundles (Next or Vite). */
 export function getPublicAuthEnv(): PublicAuthEnv {
   const apiBaseUrl =
-    readNextPublicApiUrl() ?? readViteApiUrl() ?? "http://localhost:3000"
+    readViteApiUrl() ?? "http://localhost:3009"
 
-  const googleEnabled = readNextGoogle() || readViteGoogle()
-  const githubEnabled = readNextGithub() || readViteGithub()
+  const googleEnabled = readViteGoogle()
+  const githubEnabled = readViteGithub()
 
   return { apiBaseUrl, googleEnabled, githubEnabled }
 }

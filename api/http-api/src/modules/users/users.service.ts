@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from '@workspace/db';
 
 import { PrismaService } from '../../prisma.service.js';
 
@@ -6,18 +7,18 @@ import { PrismaService } from '../../prisma.service.js';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
+  findAll(): Promise<User[]> {
     return this.prisma.user.findMany({
       take: 10,
       orderBy: { createdAt: 'desc' },
     });
   }
 
-  findById(id: string) {
+  findById(id: string): Promise<User | null> {
     return this.prisma.user.findUnique({ where: { id } });
   }
 
-  findByEmail(email: string) {
+  findByEmail(email: string): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
@@ -27,7 +28,7 @@ export class UsersService {
     email: string;
     passwordHash: string | null;
     name: string | null;
-  }) {
+  }): Promise<User> {
     return this.prisma.user.create({
       data: {
         email: input.email.toLowerCase(),
