@@ -218,7 +218,7 @@ const value: string = "default";
 
 ### Backend (NestJS API)
 
-**File**: `apps/nestjs-prisma-api/tsconfig.json`
+**File**: `apps/http-api/tsconfig.json`
 
 ```json
 {

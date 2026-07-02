@@ -16,6 +16,7 @@
     "@workspace/auth-client": "workspace:*",
     "@workspace/ui-components": "workspace:*",
     "@workspace/ui-core": "workspace:*",
+    "@workspace/ui-clients": "workspace:*",
     "@workspace/ui-utils": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "latest",

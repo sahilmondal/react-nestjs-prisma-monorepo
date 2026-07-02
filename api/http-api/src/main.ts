@@ -32,6 +32,19 @@ async function bootstrap() {
     }),
   );
 
+  // Optional Swagger UI (controlled by ENABLE_SWAGGER_UI env var)
+  if (process.env.ENABLE_SWAGGER_UI === 'true') {
+    const { SwaggerModule, DocumentBuilder } = await import('@nestjs/swagger');
+    const config = new DocumentBuilder()
+      .setTitle('NestJS Prisma API')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .addCookieAuth('refresh_token')
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api-docs', app, document);
+  }
+
   const rawPort = (process.env.PORT ?? '').trim();
   const parsedPort = rawPort.length > 0 ? Number(rawPort) : Number.NaN;
   const port =
@@ -40,7 +53,7 @@ async function bootstrap() {
       : 3009;
 
   await app.listen(port);
-  console.log(`🚀 nestjs-prisma-api running at http://localhost:${port}`);
+  console.log(`🚀 http-api running at http://localhost:${port}`);
 }
 
 bootstrap().catch((error) => {

@@ -655,7 +655,7 @@ Agents should update this file after:
 ## See Also
 
 - [apps/nextjs-app/SKILLS.md](../../apps/nextjs-app/SKILLS.md) — Frontend usage
-- [apps/nestjs-prisma-api/SKILLS.md](../../apps/nestjs-prisma-api/SKILLS.md) — Backend API
+- [apps/http-api/SKILLS.md](../../apps/http-api/SKILLS.md) — Backend API
 - [INTEGRATION-GUIDE.md](../../INTEGRATION-GUIDE.md) — Full auth flow with examples
 
 ## Recently Added by AI Agents

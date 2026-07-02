@@ -35,7 +35,7 @@ react-nestjs-prisma-monorepo/
 │   └── taste
 │       └── taste.md
 ├── api
-│   └── nestjs-prisma-api
+│   └── http-api
 │       ├── .agents
 │       │   └── skills
 │       │       ├── prisma-cli
@@ -266,9 +266,9 @@ cd react-nestjs-prisma-monorepo
 
 ### 2. Setup Environment Variables
 
-#### NestJS API Environment (apps/nestjs-prisma-api)
+#### NestJS API Environment (apps/http-api)
 
-Create `.env` file in `apps/nestjs-prisma-api/`:
+Create `.env` file in `apps/http-api/`:
 
 ```env
 NODE_ENV=development
@@ -325,21 +325,21 @@ Run one of the following commands based on your needs:
 #### Option A: Push schema to database (recommended for fresh start)
 
 ```bash
-cd apps/nestjs-prisma-api
+cd apps/http-api
 bun run db:push
 ```
 
 #### Option B: Run migrations
 
 ```bash
-cd apps/nestjs-prisma-api
+cd apps/http-api
 bun run db:migrate
 ```
 
 #### Option C: Reset database (⚠️ Warning: Deletes all data)
 
 ```bash
-cd apps/nestjs-prisma-api
+cd apps/http-api
 bun run db:reset
 ```
 
@@ -361,7 +361,7 @@ This will start both applications simultaneously:
 #### Start only NestJS API:
 
 ```bash
-cd apps/nestjs-prisma-api
+cd apps/http-api
 bun dev
 ```
 
@@ -374,7 +374,7 @@ bun dev
 
 ## Database Commands
 
-All database commands should be run from the `apps/nestjs-prisma-api/` directory:
+All database commands should be run from the `apps/http-api/` directory:
 
 ```bash
 # Generate Prisma Client

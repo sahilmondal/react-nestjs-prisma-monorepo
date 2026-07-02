@@ -1,5 +1,5 @@
 {
-  "app": "nestjs-prisma-api",
+  "app": "http-api",
   "lastUpdatedDate": "2026-05-18",
   "description": "NestJS backend with Prisma ORM, authentication, and email services",
   "changes": [

@@ -10,7 +10,7 @@ tags: [nestjs, backend, auth, prisma, postgresql, jwt, oauth]
 
 Full-stack authentication API built with NestJS, Prisma ORM, PostgreSQL, and Passport.js. Supports JWT, OAuth2 (Google/GitHub), and refresh token patterns with email-based password recovery.
 
-**Location**: `apps/nestjs-prisma-api/`  
+**Location**: `apps/http-api/`  
 **Port**: 3009 (development)  
 **Runtime**: Node 20+ or Bun 1.2.6+  
 **Package Manager**: Bun
@@ -641,7 +641,7 @@ See `package.json` for exact versions.
 2. **Create migration**:
 
    ```bash
-   cd apps/nestjs-prisma-api
+   cd apps/http-api
    bun run prisma migrate dev --name add_phone_number
    ```
 
@@ -695,7 +695,7 @@ See `package.json` for exact versions.
 ## File Structure
 
 ```
-apps/nestjs-prisma-api/
+apps/http-api/
 ├── src/
 │   ├── app.module.ts              # Root module
 │   ├── main.ts                    # Entry point, middleware setup

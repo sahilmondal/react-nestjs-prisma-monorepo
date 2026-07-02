@@ -162,7 +162,7 @@ module.exports = {
 
 ### Backend (NestJS API)
 
-**File**: `apps/nestjs-prisma-api/.eslintrc.json`
+**File**: `apps/http-api/.eslintrc.json`
 
 ```json
 {
@@ -219,7 +219,7 @@ bun run lint -- --fix # Auto-fix issues
 ### Per Package
 
 ```bash
-cd apps/nestjs-prisma-api
+cd apps/http-api
 bun run lint
 bun run lint -- --fix
 ```

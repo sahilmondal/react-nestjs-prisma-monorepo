@@ -1,4 +1,4 @@
-# NestJS + Prisma + Resend API (`nestjs-prisma-api`)
+# NestJS + Prisma + Resend API (`http-api`)
 
 This is a modern, high-performance backend API built for the Turborepo monorepo. It features a complete authentication system with JWT, OAuth (Google & GitHub), and password reset capabilities.
 

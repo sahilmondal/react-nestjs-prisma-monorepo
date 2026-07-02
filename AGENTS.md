@@ -4,27 +4,35 @@ This repository contains a full-stack monorepo featuring a React (Vite + TanStac
 
 ## Architectural Overview
 
-### 1. `apps/nestjs-prisma-api`
+### 1. `apps/http-api`
+
 The backend API built with NestJS.
-- **ORM**: Prisma (schema in `apps/nestjs-prisma-api/prisma/schema.prisma`).
+
+- **ORM**: Prisma (schema in `apps/http-api/prisma/schema.prisma`).
 - **Auth**: Passport.js for JWT & OAuth.
 - **Rules**: Never bypass the Auth Guards. Ensure validation decorators are applied to all incoming DTOs.
 
 ### 2. `ui/apps/react-app`
+
 The primary frontend application.
+
 - **Framework**: React 19 + Vite + TanStack Router (`@tanstack/react-router`).
 - **Styling**: Tailwind CSS v4. No Next.js or generic CSS files; styling happens via Tailwind utility classes and CSS variables in `styles.css`.
 - **Routing**: Uses file-based routing in `src/routes`.
 - **Local Components**: Application-specific components like the `Auth` feature (login, signup, forgot-password forms, and the Auth Guard) are located in `src/components/Auth`.
 
 ### 3. `packages/auth-client`
+
 A shared client library for making API requests to the NestJS backend and managing session state.
+
 - **State**: Uses `zustand` to manage the JWT token and user session (`useAuthStore`).
 - **API Wrapper**: Defines async functions to call backend endpoints.
 - **Env**: Extracts public environment variables (e.g., `VITE_API_URL`).
 
 ### 4. `ui/shared/*`
+
 Reusable UI components.
+
 - **`ui-core`**: The base shadcn/ui components (`Button`, `Input`, `Form`, etc.).
 - **`ui-components`**: Higher-level domain components that are shared across apps (if any).
 

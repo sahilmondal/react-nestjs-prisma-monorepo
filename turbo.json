@@ -9,6 +9,11 @@
         "dist/**"
       ]
     },
+    "generate": {
+      "dependsOn": ["api#build"],
+      "outputs": ["src/generated/**"],
+      "cache": true
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
